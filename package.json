@@ -1,4 +1,6 @@
 {
+  "name": "rubick-password",
+  "version": "0.0.1",
   "scripts": {
     "dev": "webpack -w",
     "build": "webpack --mode production"

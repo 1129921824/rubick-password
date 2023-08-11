@@ -43,7 +43,7 @@ export default class Reset extends React.Component {
     setTimeout(() => {
       if (!window.services.resetBcryptPass(password)) return
       const newKeyIV = window.services.verifyPassword(password)
-      const accounts = window.utools.db.allDocs('account/')
+      const accounts = window.rubick.db.allDocs('account/')
       accounts.forEach(item => {
         ['title', 'username', 'password', 'remark', 'link'].forEach(f => {
           if (!item[f]) return
@@ -53,7 +53,7 @@ export default class Reset extends React.Component {
           } catch (e) {}
         })
       })
-      window.utools.db.bulkDocs(accounts)
+      window.rubick.db.bulkDocs(accounts)
       this.props.onOut()
     }, 50)
   }

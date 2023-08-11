@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import Button from '@mui/material/Button'
 
 export default class AccountArea extends React.Component {
-  isMacOs = window.utools.isMacOs()
+  isMacOs = window.rubick.isMacOs()
 
   state = {
     selectedIndex: 0,
@@ -41,7 +41,7 @@ export default class AccountArea extends React.Component {
     if (e.code === 'KeyN' && (this.isMacOs ? e.metaKey : e.ctrlKey)) {
       e.preventDefault()
       e.stopPropagation()
-      window.utools.subInputBlur()
+      window.rubick.subInputBlur()
       this.handleCreate()
     }
   }

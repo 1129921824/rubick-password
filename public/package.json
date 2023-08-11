@@ -1,0 +1,29 @@
+{
+  "main": "index.html",
+  "logo": "https://github.com/1129921824/rubick-password/blob/main/public/logo.png",
+  "preload": "preload.js",
+  "name": "rubick-password",
+  "pluginName": "密码管理器",
+  "description": "密码管理器",
+  "author": "再难也要坚持",
+  "version": "0.0.1",
+  "homePage": "https://raw.githubusercontent.com/1129921824/rubick-password/main/README.md",
+  "pluginType": "ui",
+  "features": [
+    {
+      "code": "passwords",
+      "explain": "开源、安全、简洁的密码管理器",
+      "cmds": [
+        "Passwords",
+        "密码管理"
+      ]
+    },
+    {
+      "code": "random",
+      "explain": "随机密码生成器",
+      "cmds": [
+        "随机密码"
+      ]
+    }
+  ]
+}

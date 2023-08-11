@@ -1,6 +1,8 @@
-### uTools 暗黑模式下 插件截图
+### Rubick 插件截图
 
 ![4A766C411CCB0253947C3BA8CFA3963D](https://user-images.githubusercontent.com/4998729/122719145-61a90800-d2a0-11eb-9a21-8e15035e7e39.png)
+
+此插件迁移自utools仓库，如有侵权请私信下架。
 
 ### 构建 - 运行
 ```
@@ -9,7 +11,6 @@ npm install
 ```
 npm run build
 ```
-**uTools 开发者工具** 中将 `dist/plugin.json` 加入到本地开发
 
 ### 引用的 bcrypt 库
 https://github.com/kelektiv/node.bcrypt.js
@@ -25,9 +26,7 @@ https://github.com/kelektiv/node.bcrypt.js
 
 ### 忘记密码
 
-忘记密码无法找回，只能格式化插件数据
-
-进入 *uTools 帐号与数据* -> 点击 *密码管理器* 文档 -> 格式化
+忘记密码无法找回，只能格式化插件数据。// TDOD 待实现
 
 ### 使用技巧
 

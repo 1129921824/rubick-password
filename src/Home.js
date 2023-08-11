@@ -32,7 +32,7 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    const groups = window.utools.db.allDocs('group/')
+    const groups = window.rubick.db.allDocs('group/')
     const groupDic = {}
     const groupIds = []
     const groupTree = []
@@ -55,7 +55,7 @@ class Home extends React.Component {
       // 获取解密 KEYIV
       const keyiv = this.props.keyIV
       // 获取所有帐号
-      const accounts = window.utools.db.allDocs('account/')
+      const accounts = window.rubick.db.allDocs('account/')
       if (accounts.length > 0) {
         for (const account of accounts) {
           if (account.groupId in group2Accounts) {
@@ -89,7 +89,7 @@ class Home extends React.Component {
     this.setState({ groupTree, groupIds, group2Accounts, decryptAccountDic })
     window.addEventListener('blur', this.handleDetectLive)
     window.addEventListener('focus', this.handleClearDetectLiveTimeout)
-    window.utools.setSubInput(({ text }) => {
+    window.rubick.setSubInput(({ text }) => {
       this.setState({ searchKey: text })
     }, '标题/用户名搜索')
   }
@@ -104,7 +104,7 @@ class Home extends React.Component {
             const account = group2Accounts[groupId][i]
             if (account.sort !== i) {
               account.sort = i
-              window.utools.db.put(account)
+              window.rubick.db.put(account)
             }
           }
         }
@@ -126,7 +126,7 @@ class Home extends React.Component {
   handleGroupUpdate = (node) => {
     const group = { ...node }
     delete group.childs
-    const result = window.utools.db.put(group)
+    const result = window.rubick.db.put(group)
     if (result.ok) {
       node._rev = result.rev
     } else {
@@ -135,7 +135,7 @@ class Home extends React.Component {
   }
 
   handleGroupCreate = (node, parentNode) => {
-    const result = window.utools.db.put({
+    const result = window.rubick.db.put({
       _id: 'group/' + Date.now(),
       name: node.name,
       parentId: parentNode ? parentNode._id : ''
@@ -149,7 +149,7 @@ class Home extends React.Component {
   }
 
   handleGroupDelete = (node) => {
-    const result = window.utools.db.remove(node)
+    const result = window.rubick.db.remove(node)
     if (result.error) {
       this.alertDbError()
     }
@@ -182,7 +182,7 @@ class Home extends React.Component {
     } else {
       newAccount.sort = 0
     }
-    const result = window.utools.db.put(newAccount)
+    const result = window.rubick.db.put(newAccount)
     if (result.error) {
       return this.alertDbError()
     }
@@ -199,14 +199,14 @@ class Home extends React.Component {
   }
 
   handleAccountUpdate = (account) => {
-    const result = window.utools.db.put(account)
+    const result = window.rubick.db.put(account)
     if (result.ok) {
       account._rev = result.rev
     } else {
       if (result.error && result.name === 'conflict') { // 修改冲突
-        const newdoc = window.utools.db.get(account._id)
+        const newdoc = window.rubick.db.get(account._id)
         account._rev = newdoc._rev
-        const retry = window.utools.db.put(account)
+        const retry = window.rubick.db.put(account)
         if (retry.ok) {
           account._rev = result.retry
         } else {
@@ -220,7 +220,7 @@ class Home extends React.Component {
 
   handleAccountDelete = (account) => {
     const { group2Accounts, decryptAccountDic } = this.state
-    const result = window.utools.db.remove(account)
+    const result = window.rubick.db.remove(account)
     if (result.error) {
       return this.alertDbError()
     }

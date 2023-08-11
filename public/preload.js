@@ -12,7 +12,7 @@ window.services = {
   setBcryptPass: (password) => {
     if (!password) return false
     const bcryptPass = bcrypt.hashSync(password, 10)
-    const result = window.utools.db.put({
+    const result = window.rubick.db.put({
       _id: 'bcryptpass',
       value: bcryptPass
     })
@@ -21,15 +21,15 @@ window.services = {
   },
   resetBcryptPass: (password) => {
     if (!password) return false
-    const passDoc = window.utools.db.get('bcryptpass')
+    const passDoc = window.rubick.db.get('bcryptpass')
     if (!passDoc) return false
     passDoc.value = bcrypt.hashSync(password, 10)
-    const result = window.utools.db.put(passDoc)
+    const result = window.rubick.db.put(passDoc)
     if (result.error) return false
     return true
   },
   verifyPassword: (password) => {
-    const passDoc = window.utools.db.get('bcryptpass')
+    const passDoc = window.rubick.db.get('bcryptpass')
     if (!passDoc) return false
     if (bcrypt.compareSync(password, passDoc.value)) {
       return getKeyIv(password)
@@ -49,8 +49,8 @@ window.services = {
   exportFile: (content, ext = '.txt') => {
     const fs = require('fs')
     const path = require('path')
-    const saveFile = path.join(window.utools.getPath('downloads'), 'uTools-密码管理器-' + Date.now() + ext)
+    const saveFile = path.join(window.rubick.getPath('downloads'), 'Rubick-密码管理器-' + Date.now() + ext)
     fs.writeFileSync(saveFile, content, 'utf-8')
-    window.utools.shellShowItemInFolder(saveFile)
+    window.rubick.shellShowItemInFolder(saveFile)
   }
 }

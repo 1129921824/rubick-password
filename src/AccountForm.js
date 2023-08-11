@@ -18,7 +18,7 @@ import SendIcon from '@mui/icons-material/Send'
 import RandomPassword from './RandomPassword'
 
 export default class AccountForm extends React.Component {
-  isMacOs = window.utools.isMacOs()
+  isMacOs = window.rubick.isMacOs()
 
   state = {
     titleValue: '',
@@ -34,7 +34,7 @@ export default class AccountForm extends React.Component {
     if ((e.code === 'KeyU' || e.code === 'KeyP') && (this.isMacOs ? e.metaKey : e.ctrlKey)) {
       e.preventDefault()
       e.stopPropagation()
-      window.utools.hideMainWindow()
+      window.rubick.hideMainWindow()
       this.handleCopy(e.code === 'KeyU' ? 'usernameValue' : 'passwordValue')()
     }
     if ((e.code === 'ArrowUp' || e.code === 'ArrowDown') && (e.keyCode === 229 || e.target.nodeName === 'TEXTAREA')) {
@@ -104,7 +104,7 @@ export default class AccountForm extends React.Component {
 
   handleCopy = (target) => () => {
     const targetValue = this.state[target]
-    window.utools.copyText(targetValue)
+    window.rubick.copyText(targetValue)
   }
 
   handlePasswordVisible = () => {
@@ -128,8 +128,8 @@ export default class AccountForm extends React.Component {
 
   handleOpenLink = () => {
     if (!this.state.linkValue) return
-    window.utools.hideMainWindow(false)
-    window.utools.shellOpenExternal(this.state.linkValue)
+    window.rubick.hideMainWindow(false)
+    window.rubick.shellOpenExternal(this.state.linkValue)
   }
 
   handleOkRandomPassword = () => {

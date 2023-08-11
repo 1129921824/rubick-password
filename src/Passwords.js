@@ -5,7 +5,7 @@ import Home from './Home'
 
 export default class Passwords extends React.Component {
   state = {
-    hadKey: Boolean(window.utools.db.get('bcryptpass')),
+    hadKey: Boolean(window.rubick.db.get('bcryptpass')),
     keyIV: ''
   }
 
@@ -20,7 +20,7 @@ export default class Passwords extends React.Component {
   handleOut = () => {
     if (this.state.keyIV) {
       this.setState({ keyIV: '' })
-      window.utools.removeSubInput()
+      window.rubick.removeSubInput()
     }
   }
 
@@ -28,7 +28,7 @@ export default class Passwords extends React.Component {
     const isOk = window.services.setBcryptPass(passText)
     if (!isOk) return
     // 插入基本数据
-    const newGroup = window.utools.db.put({ _id: 'group/' + Date.now(), name: '默认分组', parentId: '' })
+    const newGroup = window.rubick.db.put({ _id: 'group/' + Date.now(), name: '默认分组', parentId: '' })
     if (newGroup.ok) {
       const keyiv = window.services.verifyPassword(passText)
       const newAccount = {
@@ -39,7 +39,7 @@ export default class Passwords extends React.Component {
         createAt: Date.now(),
         sort: 0
       }
-      window.utools.db.put(newAccount)
+      window.rubick.db.put(newAccount)
     }
     this.setState({ hadKey: true, keyIV: '' })
   }
