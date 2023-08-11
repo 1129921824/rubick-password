@@ -45,12 +45,11 @@ export default class App extends React.Component {
   componentDidMount () {
     // 进入插件
     window.rubick.onPluginEnter(({ code, type, payload }) => {
-      console.log(code, type, payload);
       this.setState({ code })
     })
     // 退出插件
     window.rubick.onPluginOut(() => {
-      // this.setState({ code: '' })
+      this.setState({ code: '' })
     })
     // 主题切换事件
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
